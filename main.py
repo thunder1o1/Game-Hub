@@ -40,8 +40,8 @@ def buttons():
         p.draw.rect(r, (255, 0, 0), [300, 200, 200, 200])
     else:
         r.blit(Tplay.copy, Tplay.rect)
-        Tplay.copy = p.transform.rotate(Tplay.text, FRAME)
-        Tplay.rect.center = (FRAME, FRAME)
+        Tplay.rect.center = ((FRAME % 680 if FRAME % 1360 < 680 else 680 - FRAME % 680) + 60,
+                            (FRAME % 564 if FRAME % 1128 < 564 else 564 - FRAME % 564) + 36)
 #endregion
 
 running = True
@@ -50,7 +50,7 @@ while running:
         if event.type == p.QUIT:
             running = False
     
-    FRAME += 1
+    FRAME += 2
     bg()
     buttons()
     p.display.update()
